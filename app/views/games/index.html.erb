@@ -1,0 +1,217 @@
+<div class="page-header">
+  <h1>
+    Games
+    <a href="/games/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
+  </h1>
+</div>
+
+<!-- Simple table layout example -->
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Photographer</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Location</th>
+          <th>Sport</th>
+          <th>Level</th>
+          <th>Gender</th>
+          <th>Home</th>
+          <th>Away</th>
+          <th>Event title</th>
+          <th>Check in time</th>
+          <th>Check out time</th>
+          <th>Comments</th>
+          <th>Photos submitted</th>
+          <th>Game paid</th>
+          <th>Rainout</th>
+          <th>Denied entry</th>
+          <th>Equipment failure</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @games.each do |game| %>
+          <tr>
+            <td><%= game.photographer.first_name%> <%=game.photographer.last_name %></td>
+            <td><%= game.date %></td>
+            <td><%= game.time %></td>
+            <td><%= game.location.short_name %></td>
+            <td><%= game.sport.sport %></td>
+            <td><%= game.level.level %></td>
+            <td><%= game.gender.gender %></td>
+            <td><%= School.find_by({ :id => game.home_id }).short_name%></td>
+            <td><%= School.find_by({ :id => game.away_id }).short_name%></td>
+            <td><%= game.event_title_id %></td>
+            <td><%= game.check_in_time %></td>
+            <td><%= game.check_out_time %></td>
+            <td><%= game.comments %></td>
+            <td><%= game.photos_submitted %></td>
+            <td><%= game.game_paid %></td>
+            <td><%= game.rainout %></td>
+            <td><%= game.denied_entry %></td>
+            <td><%= game.equipment_failure %></td>
+            <td>
+              <a href="/games/<%= game.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/games/<%= game.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/delete_game/<%= game.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- End simple table layout example -->
+
+<!-- Responsive, Isotope-based layout example -->
+
+<div class="row">
+  <div class="col-xs-12">
+    <input type="text" id="quicksearch" placeholder="Search Games (start typing)" class="form-control">
+  </div>
+</div>
+
+<hr>
+
+<div class="row isotope-container">
+<% @games.each do |game| %>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Game #<%= game.id %></h3>
+      </div>
+      <div class="panel-body">
+        <dl>
+          <dt>Photographer</dt>
+          <dd><%= game.photographer_id %></dd>
+
+          <dt>Date</dt>
+          <dd><%= game.date %></dd>
+
+          <dt>Time</dt>
+          <dd><%= game.time %></dd>
+
+          <dt>Location</dt>
+          <dd><%= game.location_id %></dd>
+
+          <dt>Sport</dt>
+          <dd><%= game.sport_id %></dd>
+
+          <dt>Level</dt>
+          <dd><%= game.level_id %></dd>
+
+          <dt>Gender</dt>
+          <dd><%= game.gender_id %></dd>
+
+          <dt>Home</dt>
+          <dd><%= game.home_id %></dd>
+
+          <dt>Away</dt>
+          <dd><%= game.away_id %></dd>
+
+          <dt>Event title</dt>
+          <dd><%= game.event_title_id %></dd>
+
+          <dt>Check in time</dt>
+          <dd><%= game.check_in_time %></dd>
+
+          <dt>Check out time</dt>
+          <dd><%= game.check_out_time %></dd>
+
+          <dt>Comments</dt>
+          <dd><%= game.comments %></dd>
+
+          <dt>Photos submitted</dt>
+          <dd><%= game.photos_submitted %></dd>
+
+          <dt>Game paid</dt>
+          <dd><%= game.game_paid %></dd>
+
+          <dt>Rainout</dt>
+          <dd><%= game.rainout %></dd>
+
+          <dt>Denied entry</dt>
+          <dd><%= game.denied_entry %></dd>
+
+          <dt>Equipment failure</dt>
+          <dd><%= game.equipment_failure %></dd>
+
+        </dl>
+        <div class="btn-group btn-group-justified">
+          <a href="/games/<%= game.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+
+          <a href="/games/<%= game.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+
+          <a href="/delete_game/<%= game.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<!-- JavaScript for Isotope layout and quicksearch -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
+<script>
+  $(function() {
+    // quick search regex
+    var qsRegex;
+
+    // init Isotope
+    var $container = $('.isotope-container').isotope({
+      itemSelector: '.isotope-item',
+      layoutMode: 'masonry',
+      filter: function() {
+        return qsRegex ? $(this).text().match( qsRegex ) : true;
+      }
+    });
+
+    // use value of search field to filter
+    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+      $container.isotope();
+    }, 200 ) );
+
+  });
+
+  // debounce so filtering doesn't happen every millisecond
+  function debounce( fn, threshold ) {
+    var timeout;
+    return function debounced() {
+      if ( timeout ) {
+        clearTimeout( timeout );
+      }
+      function delayed() {
+        fn();
+        timeout = null;
+      }
+      timeout = setTimeout( delayed, threshold || 100 );
+    }
+  }
+</script>
+
+<!-- End responsive, Isotope-based layout example -->

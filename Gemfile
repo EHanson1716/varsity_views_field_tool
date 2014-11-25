@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Install Raghu's starter_generators gem
+gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.git", :branch => "panels"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
