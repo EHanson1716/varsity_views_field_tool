@@ -151,54 +151,111 @@
           </div>
 
           <!-- Label and input for photos_submitted -->
-          <div class="form-group">
-            <label for="photos_submitted" class="col-sm-2 control-label">
-              Photos submitted
-            </label>
-            <div class="col-sm-10">
-              <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>">
+           <% if @game.photos_submitted == 'true' %>
+            <div class="form-group">
+              <label for="photos_submitted" class="col-sm-2 control-label">
+                Photos Submitted
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>" checked>
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="form-group">
+              <label for="photos_submitted" class="col-sm-2 control-label">
+                Photos Submitted
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>">
+              </div>
+            </div>
+          <% end %>
+
 
           <!-- Label and input for game_paid -->
-          <div class="form-group">
-            <label for="game_paid" class="col-sm-2 control-label">
-              Game paid
-            </label>
-            <div class="col-sm-10">
-              <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>">
+          <% if @game.game_paid == 'true' %>
+            <div class="form-group">
+              <label for="game_paid" class="col-sm-2 control-label">
+                Game paid
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>" checked>
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="form-group">
+              <label for="game_paid" class="col-sm-2 control-label">
+                Game Paid
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>">
+              </div>
+            </div>
+          <% end %>
+
 
           <!-- Label and input for rainout -->
-          <div class="form-group">
-            <label for="rainout" class="col-sm-2 control-label">
-              Rainout
-            </label>
-            <div class="col-sm-10">
-              <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>">
+          <% if @game.rainout == 'true' %>
+            <div class="form-group">
+              <label for="rainout" class="col-sm-2 control-label">
+                Rainout
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>" checked>
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="form-group">
+              <label for="rainout" class="col-sm-2 control-label">
+                Rainout
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>">
+              </div>
+            </div>
+          <% end %>
 
           <!-- Label and input for denied_entry -->
-          <div class="form-group">
-            <label for="denied_entry" class="col-sm-2 control-label">
-              Denied entry
-            </label>
-            <div class="col-sm-10">
-              <input type="checkbox" id="denied_entry" name="denied.entry" value="<%= TRUE %>">
+          <% if @game.denied_entry == 'true' %>
+            <div class="form-group">
+              <label for="denied_entry" class="col-sm-2 control-label">
+                Denied Entry
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>" checked>
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="form-group">
+              <label for="denied_entry" class="col-sm-2 control-label">
+                Denied Entry
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>">
+              </div>
+            </div>
+          <% end %>
 
           <!-- Label and input for equipment_failure -->
-          <div class="form-group">
-            <label for="equipment_failure" class="col-sm-2 control-label">
-              Equipment failure
-            </label>
-            <div class="col-sm-10">
-              <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>">
+          <% if @game.equipment_failure == 'true' %>
+            <div class="form-group">
+              <label for="equipment_failure" class="col-sm-2 control-label">
+                Equipment Failure
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>" checked>
+              </div>
             </div>
-          </div>
+          <% else %>
+            <div class="form-group">
+              <label for="equipment_failure" class="col-sm-2 control-label">
+                Equipment Failure
+              </label>
+              <div class="col-sm-10">
+                <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>">
+              </div>
+            </div>
+          <% end %>
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

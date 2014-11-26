@@ -29,22 +29,30 @@
         </div>
 
         <div class="row">
-          <div class="col-md-9" "col-sm-6">
-            <dl class="dl-horizontal">
-              <dt>Games</dt>
-              <dd>
-              <% ordered_games = @photographer.games.order(:date) %>
-              <% ordered_games.each do |game| %>
-                <li> <%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
-                <% end %>
-              </dd>
-            </dl>
-          </div>
-          <div class="col-md-3" "col-sm-2">
-            <dl class="dl-horizontal">
-              <dt>Payment Status</dt>
-            </dl>
-          </div>
+          <table class="table table-striped">
+            <tr>
+              <td>Games</td>
+              <td>Photos Received</td>
+              <td>Payment Status</td>
+            </tr>
+            <tr>
+              <td>
+               <% ordered_games = @photographer.games.order(:date) %>
+               <% ordered_games.each do |game| %>
+               <li> <%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
+               <% end %>
+             </td>
+             <td>
+               <% ordered_games.each do |game| %>
+               <li> <%= debug(game.photos_submitted) %> </li>
+               <% end %>
+             </td>
+             <td>
+               <% ordered_games.each do |game| %>
+               <li> <%= debug(game.game_paid) %> </li>
+               <% end %>
+              </td>
+           </tr>
         </div>
 
         <div class="row">
