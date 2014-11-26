@@ -4,7 +4,7 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Photographer #<%= @photographer.id %></h3>
+        <h3 class="panel-title">Photographer Record: <%= @photographer.first_name %> <%= @photographer.last_name %></h3>
       </div>
       <div class="panel-body">
         <div class="row">
@@ -27,8 +27,9 @@
 
               <dt>Games</dt>
               <dd>
-                <% @photographer.games.each do |game| %>
-                  <li><%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
+              <% ordered_games = @photographer.games.order(:date) %>
+              <% ordered_games.each do |game| %>
+                <li> <%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
                 <% end %>
               </dd>
 
