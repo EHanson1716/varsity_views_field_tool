@@ -25,6 +25,13 @@
               <dt>Paypal</dt>
               <dd><%= @photographer.paypal %></dd>
 
+              <dt>Games</dt>
+              <dd>
+                <% @photographer.games.each do |game| %>
+                  <li><%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
+                <% end %>
+              </dd>
+
             </dl>
             <div class="btn-group btn-group-justified">
               <a href="/photographers" class="btn btn-primary">
