@@ -5,62 +5,6 @@
   </h1>
 </div>
 
-<!-- Simple table layout example -->
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Short name</th>
-          <th>Long name</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Main phone</th>
-          <th>Rainout phone</th>
-          <th>Website</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @locations.each do |location| %>
-          <tr>
-            <td><%= location.short_name %></td>
-            <td><%= location.long_name %></td>
-            <td><%= location.address %></td>
-            <td><%= location.city %></td>
-            <td><%= location.state %></td>
-            <td><%= location.main_phone %></td>
-            <td><%= location.rainout_phone %></td>
-            <td><%= location.website %></td>
-            <td>
-              <a href="/locations/<%= location.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
-            <td>
-              <a href="/locations/<%= location.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            </td>
-            <td>
-              <a href="/delete_location/<%= location.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- End simple table layout example -->
-
 <!-- Responsive, Isotope-based layout example -->
 
 <div class="row">
