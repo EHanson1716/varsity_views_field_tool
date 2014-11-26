@@ -5,58 +5,6 @@
   </h1>
 </div>
 
-<!-- Simple table layout example -->
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Paypal</th>
-          <th>String</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @photographers.each do |photographer| %>
-          <tr>
-            <td><%= photographer.first_name %></td>
-            <td><%= photographer.last_name %></td>
-            <td><%= photographer.phone %></td>
-            <td><%= photographer.email %></td>
-            <td><%= photographer.paypal %></td>
-            <td><%= photographer.string %></td>
-            <td>
-              <a href="/photographers/<%= photographer.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
-              </a>
-            </td>
-            <td>
-              <a href="/photographers/<%= photographer.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-            </td>
-            <td>
-              <a href="/delete_photographer/<%= photographer.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- End simple table layout example -->
-
 <!-- Responsive, Isotope-based layout example -->
 
 <div class="row">
