@@ -25,7 +25,7 @@
               Photographer
             </label>
             <div class="col-sm-10">
-              <input type="text" id="photographer_id" name="photographer_id" placeholder="Photographer" class="form-control" value="<%= @game.photographer_id %>">
+              <%= select_tag(:photographer_id, options_from_collection_for_select(Photographer.all, :id, :last_name, @game.photographer_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -35,7 +35,7 @@
               Date
             </label>
             <div class="col-sm-10">
-              <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @game.date %>">
+              <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @game.date %>">
             </div>
           </div>
 
@@ -45,7 +45,7 @@
               Time
             </label>
             <div class="col-sm-10">
-              <input type="text" id="time" name="time" placeholder="Time" class="form-control" value="<%= @game.time %>">
+              <input type="time" id="time" name="time" placeholder="Time" class="form-control" value="<%= @game.time %>">
             </div>
           </div>
 
@@ -55,7 +55,7 @@
               Location
             </label>
             <div class="col-sm-10">
-              <input type="text" id="location_id" name="location_id" placeholder="Location" class="form-control" value="<%= @game.location_id %>">
+              <%= select_tag(:location_id, options_from_collection_for_select(Location.all, :id, :short_name, @game.location_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -65,7 +65,7 @@
               Sport
             </label>
             <div class="col-sm-10">
-              <input type="text" id="sport_id" name="sport_id" placeholder="Sport" class="form-control" value="<%= @game.sport_id %>">
+              <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :sport, @game.sport_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -75,7 +75,7 @@
               Level
             </label>
             <div class="col-sm-10">
-              <input type="text" id="level_id" name="level_id" placeholder="Level" class="form-control" value="<%= @game.level_id %>">
+              <%= select_tag(:level_id, options_from_collection_for_select(Level.all, :id, :level, @game.level_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -85,7 +85,7 @@
               Gender
             </label>
             <div class="col-sm-10">
-              <input type="text" id="gender_id" name="gender_id" placeholder="Gender" class="form-control" value="<%= @game.gender_id %>">
+              <%= select_tag(:gender_id, options_from_collection_for_select(Gender.all, :id, :gender, @game.gender_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -95,7 +95,7 @@
               Home
             </label>
             <div class="col-sm-10">
-              <input type="text" id="home_id" name="home_id" placeholder="Home" class="form-control" value="<%= @game.home_id %>">
+              <%= select_tag(:home_id, options_from_collection_for_select(School.all, :id, :short_name, @game.home_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -105,7 +105,7 @@
               Away
             </label>
             <div class="col-sm-10">
-              <input type="text" id="away_id" name="away_id" placeholder="Away" class="form-control" value="<%= @game.away_id %>">
+              <%= select_tag(:away_id, options_from_collection_for_select(School.all, :id, :short_name, @game.away_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -115,7 +115,7 @@
               Event title
             </label>
             <div class="col-sm-10">
-              <input type="text" id="event_title_id" name="event_title_id" placeholder="Event title" class="form-control" value="<%= @game.event_title_id %>">
+              <%= select_tag(:event_title_id, options_from_collection_for_select(EventTitle.all, :id, :title, @game.away_id), :class => "form-control") %>
             </div>
           </div>
 
@@ -125,7 +125,7 @@
               Check in time
             </label>
             <div class="col-sm-10">
-              <input type="text" id="check_in_time" name="check_in_time" placeholder="Check in time" class="form-control" value="<%= @game.check_in_time %>">
+              <input type="time" id="check_in_time" name="check_in_time" placeholder="Check in time" class="form-control" value="<%= @game.check_in_time %>">
             </div>
           </div>
 
@@ -135,7 +135,7 @@
               Check out time
             </label>
             <div class="col-sm-10">
-              <input type="text" id="check_out_time" name="check_out_time" placeholder="Check out time" class="form-control" value="<%= @game.check_out_time %>">
+              <input type="time" id="check_out_time" name="check_out_time" placeholder="Check out time" class="form-control" value="<%= @game.check_out_time %>">
             </div>
           </div>
 
@@ -155,7 +155,7 @@
               Photos submitted
             </label>
             <div class="col-sm-10">
-              <input type="text" id="photos_submitted" name="photos_submitted" placeholder="Photos submitted" class="form-control" value="<%= @game.photos_submitted %>">
+              <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>">
             </div>
           </div>
 
@@ -165,7 +165,7 @@
               Game paid
             </label>
             <div class="col-sm-10">
-              <input type="text" id="game_paid" name="game_paid" placeholder="Game paid" class="form-control" value="<%= @game.game_paid %>">
+              <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>">
             </div>
           </div>
 
@@ -175,7 +175,7 @@
               Rainout
             </label>
             <div class="col-sm-10">
-              <input type="text" id="rainout" name="rainout" placeholder="Rainout" class="form-control" value="<%= @game.rainout %>">
+              <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>">
             </div>
           </div>
 
@@ -185,7 +185,7 @@
               Denied entry
             </label>
             <div class="col-sm-10">
-              <input type="text" id="denied_entry" name="denied_entry" placeholder="Denied entry" class="form-control" value="<%= @game.denied_entry %>">
+              <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>">
             </div>
           </div>
 
@@ -195,7 +195,7 @@
               Equipment failure
             </label>
             <div class="col-sm-10">
-              <input type="text" id="equipment_failure" name="equipment_failure" placeholder="Equipment failure" class="form-control" value="<%= @game.equipment_failure %>">
+              <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>">
             </div>
           </div>
 
