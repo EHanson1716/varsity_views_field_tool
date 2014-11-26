@@ -48,7 +48,7 @@
             <td><%= game.gender.gender %></td>
             <td><%= School.find_by({ :id => game.home_id }).short_name%></td>
             <td><%= School.find_by({ :id => game.away_id }).short_name%></td>
-            <td><%= game.event_title_id %></td>
+            <td><%= game.event_title.title %></td>
             <td><%= game.check_in_time %></td>
             <td><%= game.check_out_time %></td>
             <td><%= game.comments %></td>
@@ -101,7 +101,7 @@
       <div class="panel-body">
         <dl>
           <dt>Photographer</dt>
-          <dd><%= game.photographer_id %></dd>
+          <dd><%= game.photographer.first_name %> <%= game.photographer.last_name %></dd>
 
           <dt>Date</dt>
           <dd><%= game.date %></dd>
@@ -110,25 +110,25 @@
           <dd><%= game.time %></dd>
 
           <dt>Location</dt>
-          <dd><%= game.location_id %></dd>
+          <dd><%= game.location.short_name %></dd>
 
           <dt>Sport</dt>
-          <dd><%= game.sport_id %></dd>
+          <dd><%= game.sport.sport %></dd>
 
           <dt>Level</dt>
-          <dd><%= game.level_id %></dd>
+          <dd><%= game.level.level %></dd>
 
           <dt>Gender</dt>
-          <dd><%= game.gender_id %></dd>
+          <dd><%= game.gender.gender %></dd>
 
           <dt>Home</dt>
-          <dd><%= game.home_id %></dd>
+          <dd><%= School.find_by({ :id => game.home_id }).short_name %></dd>
 
           <dt>Away</dt>
-          <dd><%= game.away_id %></dd>
+          <dd><%= School.find_by({ :id => game.away_id }).short_name %></dd>
 
           <dt>Event title</dt>
-          <dd><%= game.event_title_id %></dd>
+          <dd><%= game.event_title.title %></dd>
 
           <dt>Check in time</dt>
           <dd><%= game.check_in_time %></dd>

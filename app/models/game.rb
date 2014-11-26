@@ -6,6 +6,7 @@ class Game < ActiveRecord::Base
   belongs_to :level
   belongs_to :gender
   belongs_to :school
+  belongs_to :event_title
 
 
 
