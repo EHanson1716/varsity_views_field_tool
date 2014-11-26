@@ -24,7 +24,13 @@
 
               <dt>Paypal</dt>
               <dd><%= @photographer.paypal %></dd>
+            </dl>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-md-9" "col-sm-6">
+            <dl class="dl-horizontal">
               <dt>Games</dt>
               <dd>
               <% ordered_games = @photographer.games.order(:date) %>
@@ -32,8 +38,17 @@
                 <li> <%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)</li>
                 <% end %>
               </dd>
-
             </dl>
+          </div>
+          <div class="col-md-3" "col-sm-2">
+            <dl class="dl-horizontal">
+              <dt>Payment Status</dt>
+            </dl>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
             <div class="btn-group btn-group-justified">
               <a href="/photographers" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>
