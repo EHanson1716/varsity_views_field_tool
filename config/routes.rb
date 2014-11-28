@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   # Routes for the Level resource:
   # CREATE
   get('/levels/new', { :controller => 'levels', :action => 'new' })
@@ -135,7 +136,7 @@ Rails.application.routes.draw do
   get('/delete_game/:id', { :controller => 'games', :action => 'destroy' })
 
   # Checkin
-  get('/game_check_in/:id', { :controller => 'games', :actions => 'check_in' })
+#  get('/game_check_in/:id', { :controller => 'games', :actions => 'check_in' })
   #------------------------------
 
   # The priority is based upon order of creation: first created -> highest priority.
