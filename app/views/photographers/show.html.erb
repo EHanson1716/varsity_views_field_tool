@@ -31,42 +31,33 @@
         <div class="row">
           <table class="table table-striped">
             <tr>
-              <td>Games</td>
-              <td>Photos Received</td>
-              <td>Payment Status</td>
+              <th>Games</th>
+              <th>Photos Received</th>
+              <th>Payment Status</th>
             </tr>
-            <tr>
-              <td>
+
                 <% ordered_games = @photographer.games.order(:date) %>
                 <% ordered_games.each do |game| %>
-                <ul>
+            <tr>
+              <td>
                 <%= game.gender.gender %> &nbsp <%= game.level.level %> &nbsp<%= game.sport.sport %>, &nbsp<%= School.find_by({ :id => game.away_id }).short_name %> &nbsp at &nbsp<%= School.find_by({ :id => game.home_id }).short_name %> &nbsp(<%= game.event_title.title %>, &nbspLocation: <%= game.location.short_name %>, &nbsp <%= game.date %> &nbsp <%= game.time %>)
-                </ul>
-               <% end %>
              </td>
              <td>
-              <% ordered_games.each do |game| %>
-               <ul>
                 <% if game.photos_submitted == 'true' %>
                   <i class="fa fa-check-square-o fa-4x"></i>
                 <% else %>
                   <i class="fa fa-times fa-4x"></i>
-                <% end %>
-               </ul>
-               <% end %>
+                  <% end  %>
              </td>
              <td>
-               <% ordered_games.each do |game| %>
-               <ul>
                 <% if game.game_paid == 'true' %>
                   <i class="fa fa-check-square-o fa-4x"></i>
                 <% else %>
                   <i class="fa fa-times fa-4x"></i>
                 <% end %>
-               </ul>
-               <% end %>
             </td>
            </tr>
+           <% end %>
         </div>
 
         <div class="row">
