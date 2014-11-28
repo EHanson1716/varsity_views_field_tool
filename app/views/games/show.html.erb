@@ -11,7 +11,7 @@
           <div class="col-md-12">
             <dl class="dl-horizontal">
               <dt>Photographer</dt>
-              <dd><%= @game.photographer_id %></dd>
+              <dd><%= @game.photographer.first_name %> <%= @game.photographer.last_name %></dd>
 
               <dt>Date</dt>
               <dd><%= @game.date %></dd>
@@ -65,6 +65,33 @@
               <dd><%= @game.equipment_failure %></dd>
 
             </dl>
+
+<form>
+<div class="btn-group" role="group" aria-label="Check_In_Check_Out_Report_Issue">
+    <button type="button" class="btn btn-default" value= "<%= Time.now %>"><a href="/game_check_in/<%= @game.id %>"> Check In to Game</a></button>
+</div>
+</form>
+
+
+
+
+
+  <button type="button" class="btn btn-default">Check Out of Game</button>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      Report an Issue
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="#">Rainout</a></li>
+      <li><a href="#">Denied Entry</a></li>
+      <li><a href="#">Equipment Failure</a></li>
+    </ul>
+  </div>
+</div>
+
+
             <div class="btn-group btn-group-justified">
               <a href="/games" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>

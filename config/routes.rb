@@ -133,6 +133,9 @@ Rails.application.routes.draw do
 
   # DELETE
   get('/delete_game/:id', { :controller => 'games', :action => 'destroy' })
+
+  # Checkin
+  get('/game_check_in/:id', { :controller => 'games', :actions => 'check_in' })
   #------------------------------
 
   # The priority is based upon order of creation: first created -> highest priority.

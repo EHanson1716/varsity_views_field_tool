@@ -79,4 +79,10 @@ class GamesController < ApplicationController
 
     redirect_to "/games", :notice => "Game deleted."
   end
+
+  def check_in
+    @game = Game.find(params[:id])
+    Game.update(params[:id], 'check_in_time' => Time.now)
+    redirect_to "/games/<%= params[:id] %>"
+  end
 end
