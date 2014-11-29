@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'devise'
+#gem 'devise'
 
 # Install Raghu's starter_generators gem
 gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.git", :branch => "panels"
