@@ -8,20 +8,23 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6 col-sm-6 col-xs-6">
             <dl class="dl-horizontal">
-              <dt>Photographer</dt>
-              <dd><%= @game.photographer.first_name %> <%= @game.photographer.last_name %></dd>
+              <dt><h4><strong>Photographer</strong></h4></dt>
+              <dd><h4><%= @game.photographer.first_name %> <%= @game.photographer.last_name %></h4></dd>
 
-              <dt>Date</dt>
-              <dd><%= @game.date %></dd>
+              <dt><h4><strong>Date</strong></h4></dt>
+              <dd><h4><%= @game.date %></h4></dd>
 
-              <dt>Time</dt>
-              <dd><%= @game.time %></dd>
+              <dt><h4><strong>Time</strong></h4></dt>
+              <dd><h4><%= @game.time %></h4></dd>
 
-              <dt>Location</dt>
-              <dd><%= @game.location.short_name %></dd>
-
+              <dt><h4><strong>Location</strong></h4></dt>
+              <dd><h4><%= @game.location.short_name %></h4></dd>
+            </dl>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6">
+            <dl class="dl-horizontal">
               <dt>Sport</dt>
               <dd><%= @game.sport.sport %></dd>
 
@@ -39,32 +42,55 @@
 
               <dt>Event title</dt>
               <dd><%= @game.event_title.title %></dd>
+            </dl>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-4">
+            <dl class="dl-horizontal">
+              <dt><h6><strong>Check in time</strong></h6></dt>
+              <% if @game.check_in_time.present? == true %>
+                <dd><h6><%= @game.check_in_time.strftime("%D %r") %></h6></dd>
+              <% else %>
+                <dd><h6><%= @game.check_in_time %></h6></dd>
+              <% end %>
 
-              <dt>Check in time</dt>
-              <dd><%= @game.check_in_time %></dd>
+              <dt><h6><strong>Check out time</strong></h6></dt>
+              <% if @game.check_out_time.present? == true %>
+                <dd><h6><%= @game.check_out_time.strftime("%D %r") %></h6></dd>
+              <% else %>
+                <dd><h6><%= @game.check_out_time %></h6></dd>
+              <% end %>
 
-              <dt>Check out time</dt>
-              <dd><%= @game.check_out_time %></dd>
+              <dt><h6><strong>Comments</strong></h6></dt>
+              <dd><h6><%= @game.comments %></h6></dd>
+            </dl>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4">
+            <dl class="dl-horizontal">
 
-              <dt>Comments</dt>
-              <dd><%= @game.comments %></dd>
+              <dt><h6><strong>Photos submitted</strong></h6></dt>
+              <dd><h6><%= @game.photos_submitted %></h6></dd>
 
-              <dt>Photos submitted</dt>
-              <dd><%= @game.photos_submitted %></dd>
+              <dt><h6><strong>Game paid</strong></h6></dt>
+              <dd><h6><%= @game.game_paid %></h6></dd>
+            </dl>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-4">
+            <dl class="dl-horizontal">
 
-              <dt>Game paid</dt>
-              <dd><%= @game.game_paid %></dd>
+              <dt><h6><strong>Rainout</strong></h6></dt>
+              <dd><h6><%= @game.rainout %></h6></dd>
 
-              <dt>Rainout</dt>
-              <dd><%= @game.rainout %></dd>
+              <dt><h6><strong>Denied entry</strong></h6></dt>
+              <dd><h6><%= @game.denied_entry %></h6></dd>
 
-              <dt>Denied entry</dt>
-              <dd><%= @game.denied_entry %></dd>
-
-              <dt>Equipment failure</dt>
-              <dd><%= @game.equipment_failure %></dd>
+              <dt><h6><strong>Equipment failure</strong></h6></dt>
+              <dd><h6><%= @game.equipment_failure %></h6></dd>
 
             </dl>
+          </div>
+        </div>
 
 <form>
 <div class="btn-group" role="group" aria-label="Check_In_Check_Out_Report_Issue">
