@@ -83,6 +83,6 @@ class GamesController < ApplicationController
   def check_in
     @game = Game.find(params[:id])
     Game.update(params[:id], 'check_in_time' => Time.now)
-    redirect_to "/games/<%= params[:id] %>"
+    redirect_to "/games/#{params[:id]}"
   end
 end
