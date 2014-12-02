@@ -74,15 +74,62 @@ class GamesController < ApplicationController
 
   def destroy
     @game = Game.find(params[:id])
-
     @game.destroy
-
     redirect_to "/games", :notice => "Game deleted."
   end
 
   def check_in
     @game = Game.find(params[:id])
-    Game.update(params[:id], 'check_in_time' => Time.now)
-    redirect_to "/games/#{params[:id]}"
+    if @game.check_in_time.present? != true
+      Game.update(params[:id], 'check_in_time' => Time.now)
+      redirect_to "/games/#{params[:id]}", :notice => "You are now checked in!"
+    else
+      redirect_to "/games/#{params[:id]}", :notice => "You are already checked in! You can only check in to a game once."
+    end
   end
+
+  def check_out
+    @game = Game.find(params[:id])
+    if @game.check_out_time.present? != true
+      Game.update(params[:id], 'check_out_time' => Time.now)
+      redirect_to "/games/#{params[:id]}", :notice => "You are now checked out!"
+    else
+      redirect_to "/games/#{params[:id]}", :notice => "You are already checked out! You can only check out of a game once."
+    end
+  end
+
+  def rainout
+    @game = Game.find(params[:id])
+    if @game.rainout != 'true'
+      Game.update(params[:id], 'rainout' => 'true')
+      redirect_to "/games/#{params[:id]}", :notice => "Sorry about the bad weather. Thanks for reporting the rainout!"
+    else
+      Game.update(params[:id], 'rainout' => 'false')
+      redirect_to "/games/#{params[:id]}", :notice => "Thanks for correcting that report! We've removed the report of a rainout."
+    end
+  end
+
+  def denied_entry
+    @game = Game.find(params[:id])
+    if @game.denied_entry != 'true'
+      Game.update(params[:id], 'denied_entry' => 'true')
+      redirect_to "/games/#{params[:id]}", :notice => "Sorry about that. Thanks for reporting that you were denied entry to the game; we'll follow up with the school."
+    else
+      Game.update(params[:id], 'denied_entry' => 'false')
+      redirect_to "/games/#{params[:id]}", :notice => "Thanks for correcting that report! We've removed the report of that you were denied entry."
+    end
+  end
+
+  def equipment_failure
+    @game = Game.find(params[:id])
+    if @game.equipment_failure != 'true'
+      Game.update(params[:id], 'equipment_failure' => 'true')
+      redirect_to "/games/#{params[:id]}", :notice => "Hope your camera will be working again soon! Thanks for reporting your equipment failure issue."
+    else
+      Game.update(params[:id], 'equipment_failure' => 'false')
+      redirect_to "/games/#{params[:id]}", :notice => "Thanks for correcting that report! We've removed the report of an equipment failure."
+    end
+  end
+
+
 end

@@ -140,6 +140,20 @@ Rails.application.routes.draw do
 
   # Checkin
   get('/game_check_in/:id', { :controller => 'games', :action => 'check_in' })
+
+  # Checkout
+  get('/game_check_out/:id', { :controller => 'games', :action => 'check_out' })
+
+  # Rainout
+  get('/game_rainout/:id', { :controller => 'games', :action => 'rainout' })
+
+  # Rainout
+  get('/game_denied_entry/:id', { :controller => 'games', :action => 'denied_entry' })
+
+  # Rainout
+  get('/game_equipment_failure/:id', { :controller => 'games', :action => 'equipment_failure' })
+
+
   #------------------------------
 
   # The priority is based upon order of creation: first created -> highest priority.

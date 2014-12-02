@@ -45,6 +45,29 @@
             </dl>
           </div>
         </div>
+
+
+      <form>
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group btn-group-justified" role="group" aria-label="Check_In_Check_Out_Report_Issue">
+                <button type="button" class="btn btn-default" value= "<%= Time.now %>"><a href="/game_check_in/<%= @game.id %>"> Check In to Game</a></button>
+                <button type="button" class="btn btn-default" value= "<%= Time.now %>"><a href="/game_check_out/<%= @game.id %>"> Check Out of Game</a></button>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="report_issue_dropdown" data-toggle="dropdown" aria-expanded="true">
+                    Report an Issue
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="report_issue_dropdown">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/game_rainout/<%= @game.id %>">Rainout</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/game_denied_entry/<%= @game.id %>">Denied Entry</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="/game_equipment_failure/<%= @game.id %>">Equipment Failure</a></li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+      </form>
+
+
         <div class="row">
           <div class="col-md-4 col-sm-4 col-xs-4">
             <dl class="dl-horizontal">
@@ -70,53 +93,58 @@
             <dl class="dl-horizontal">
 
               <dt><h6><strong>Photos submitted</strong></h6></dt>
-              <dd><h6><%= @game.photos_submitted %></h6></dd>
+              <dd>
+                <h6>
+                  <% if @game.photos_submitted == 'true'  %>
+                      <i class="fa fa-check-square-o fa"></i>
+                    <% else %>
+                      <i class="fa fa-times fa"></i>
+                  <% end %>
+                </h6>
+              </dd>
 
               <dt><h6><strong>Game paid</strong></h6></dt>
-              <dd><h6><%= @game.game_paid %></h6></dd>
+              <dd>
+                <h6>
+                  <% if @game.game_paid == 'true'  %>
+                      <i class="fa fa-check-square-o fa"></i>
+                    <% else %>
+                      <i class="fa fa-times fa"></i>
+                  <% end %>
+                </h6>
+              </dd>
             </dl>
           </div>
           <div class="col-md-4 col-sm-4 col-xs-4">
             <dl class="dl-horizontal">
 
               <dt><h6><strong>Rainout</strong></h6></dt>
-              <dd><h6><%= @game.rainout %></h6></dd>
+              <% if @game.rainout == 'true'  %>
+                <dd><h6><i class="fa fa-exclamation-triangle"></i></h6></dd>
+              <% else %>
+                <dd><h6></i></h6></dd>
+              <% end %>
+
 
               <dt><h6><strong>Denied entry</strong></h6></dt>
-              <dd><h6><%= @game.denied_entry %></h6></dd>
+              <% if @game.denied_entry == 'true'  %>
+                <dd><h6><i class="fa fa-exclamation-triangle"></i></h6></dd>
+              <% else %>
+                <dd><h6></i></h6></dd>
+              <% end %>
 
               <dt><h6><strong>Equipment failure</strong></h6></dt>
-              <dd><h6><%= @game.equipment_failure %></h6></dd>
+              <% if @game.equipment_failure == 'true'  %>
+                <dd><h6><i class="fa fa-exclamation-triangle"></i></h6></dd>
+              <% else %>
+                <dd><h6></i></h6></dd>
+              <% end %>
 
             </dl>
+
           </div>
         </div>
-
-<form>
-<div class="btn-group" role="group" aria-label="Check_In_Check_Out_Report_Issue">
-    <button type="button" class="btn btn-default" value= "<%= Time.now %>"><a href="/game_check_in/<%= @game.id %>"> Check In to Game</a></button>
-</div>
-</form>
-
-
-
-
-
-  <button type="button" class="btn btn-default">Check Out of Game</button>
-
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      Report an Issue
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">Rainout</a></li>
-      <li><a href="#">Denied Entry</a></li>
-      <li><a href="#">Equipment Failure</a></li>
-    </ul>
-  </div>
-</div>
-
+      </div>
 
             <div class="btn-group btn-group-justified">
               <a href="/games" class="btn btn-primary">
