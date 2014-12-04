@@ -39,7 +39,7 @@ class PhotographersController < ApplicationController
     @photographer.phone = params[:phone]
     @photographer.email = params[:email]
     @photographer.paypal = params[:paypal]
-    @photographer.string = params[:string]
+    @photographer.admin_status = params[:admin_status]
 
     if @photographer.save
       redirect_to "/photographers", :notice => "Photographer updated successfully."

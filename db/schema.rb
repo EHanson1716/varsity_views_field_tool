@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141129161425) do
+ActiveRecord::Schema.define(version: 20141204003320) do
 
   create_table "event_titles", force: true do |t|
     t.string   "title"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20141129161425) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.binary   "admin_status"
   end
 
   add_index "photographers", ["email"], name: "index_photographers_on_email", unique: true

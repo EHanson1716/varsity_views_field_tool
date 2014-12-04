@@ -39,9 +39,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="/games">View My Games</a></li>
+        <li><a href="/photographers/<%=current_photographer.id%>">View My Games</a></li>
         <li><a href="/games/new">Add New Games</a></li>
-        <li><a href="/photographers/#{[:id]}/edit ">Edit My Profile</a></li>
+        <li><a href="/photographers/<%=current_photographer.id%>/edit ">Edit My Profile</a></li>
         <li><a href="#">About</a></li>
       </ul>
 
