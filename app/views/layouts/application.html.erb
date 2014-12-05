@@ -53,7 +53,7 @@
           <li><a href="/photographers/<%=current_photographer.id%>">View My Games</a></li>
           <li><a href="/photographers/<%=current_photographer.id%>/edit ">Edit My Profile</a></li>
 
-          <% if current_photographer.admin_status = 'true' %>
+          <% if current_photographer.admin_status == 'true' %>
 
             <li><a href="/games/">View All Games</a></li>
             <li><a href="/manage_attributes">Manage Game Attributes</a></li>

@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all
+    @games = Game.where(:photographer_id => current_photographer.id)
   end
 
   def show
