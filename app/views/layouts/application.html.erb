@@ -40,25 +40,9 @@
     <% if current_photographer == nil %>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="/photographers/{#[:id]}">View My Games</a></li>
-          <li><a href="/photographers/{#[:id]}/edit ">Edit My Profile</a></li>
-
-
-
-          <li><a href="/games/new">Add New Games</a></li>
-
-
-        </ul>
-
         <ul class="nav navbar-nav navbar-right">
-          <% if current_photographer != nil %>
-            <li><a href="/photographers/edit">Change your Password</a></li>
-            <li><a href="/photographers/sign_out" data-method="delete">Sign out</a></li>
-          <% else %>
-            <li><a href="/photographers/sign_up">Sign up</a></li>
-            <li><a href="/photographers/sign_in">Sign in</a></li>
-          <% end %>
+          <li><a href="/photographers/sign_up">Sign up</a></li>
+          <li><a href="/photographers/sign_in">Sign in</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
 
@@ -67,8 +51,15 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="/photographers/<%=current_photographer.id%>">View My Games</a></li>
-          <li><a href="/games/new">Add New Games</a></li>
           <li><a href="/photographers/<%=current_photographer.id%>/edit ">Edit My Profile</a></li>
+
+          <% if current_photographer.admin_status = 'true' %>
+
+            <li><a href="/games/">View All Games</a></li>
+            <li><a href="/manage_attributes">Manage Game Attributes</a></li>
+          <% else %>
+          <% end %>
+
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

@@ -153,8 +153,12 @@ Rails.application.routes.draw do
   # Rainout
   get('/game_equipment_failure/:id', { :controller => 'games', :action => 'equipment_failure' })
 
-
   #------------------------------
+
+  # Route for a Manage Attributes landing page
+
+  # Manage Attributes
+  get('/manage_attributes', { :controller => 'attributes', :action => 'manage'})
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
