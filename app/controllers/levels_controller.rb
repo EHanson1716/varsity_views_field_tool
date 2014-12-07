@@ -12,13 +12,18 @@ class LevelsController < ApplicationController
   end
 
   def create
-    @level = Level.new
-    @level.level = params[:level]
+   if current_photographer.try(:admin_status?)
 
-    if @level.save
-      redirect_to "/levels", :notice => "Level created successfully."
+      @level = Level.new
+      @level.level = params[:level]
+
+      if @level.save
+        redirect_to "/levels", :notice => "Level created successfully."
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      render 'not_admin'
     end
   end
 
@@ -27,22 +32,30 @@ class LevelsController < ApplicationController
   end
 
   def update
-    @level = Level.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @level = Level.find(params[:id])
 
-    @level.level = params[:level]
+      @level.level = params[:level]
 
-    if @level.save
-      redirect_to "/levels", :notice => "Level updated successfully."
+      if @level.save
+        redirect_to "/levels", :notice => "Level updated successfully."
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      render 'not_admin'
     end
   end
 
   def destroy
-    @level = Level.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @level = Level.find(params[:id])
 
-    @level.destroy
+      @level.destroy
 
-    redirect_to "/levels", :notice => "Level deleted."
+      redirect_to "/levels", :notice => "Level deleted."
+    else
+      render 'not_admin'
+    end
   end
 end

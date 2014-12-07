@@ -33,7 +33,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/games" class="navbar-brand">Varsity Views Photographer Tool</a>
+      <a href="/photographers/<%= current_photographer.try(:id) %>" class="navbar-brand">Varsity Views Photographer Tool</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -50,6 +50,7 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <li>Welcome, <%= current_photographer.first_name %> <%= current_photographer.last_name %>!</li>
           <li><a href="/photographers/<%=current_photographer.id%>">View My Games</a></li>
           <li><a href="/photographers/<%=current_photographer.id%>/edit ">Edit My Profile</a></li>
 

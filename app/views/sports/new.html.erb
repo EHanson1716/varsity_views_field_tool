@@ -1,3 +1,7 @@
+<!-- Admin access only -->
+<% if current_photographer.try(:admin_status?) %>
+
+
 <!-- Validation failure messages -->
 
 <% if @sport.errors.any? %>
@@ -43,3 +47,9 @@
 </div>
 
 <!-- End responsive panel example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

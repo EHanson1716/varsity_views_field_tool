@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :photographers
 
-  root to: 'games#index'
+  root to: 'photographers#show'
 
   # Routes for the Level resource:
   # CREATE

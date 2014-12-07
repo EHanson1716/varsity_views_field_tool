@@ -12,14 +12,21 @@ class GendersController < ApplicationController
   end
 
   def create
-    @gender = Gender.new
-    @gender.gender = params[:gender]
+   if current_photographer.try(:admin_status?)
 
-    if @gender.save
-      redirect_to "/genders", :notice => "Gender created successfully."
+      @gender = Gender.new
+      @gender.gender = params[:gender]
+
+      if @gender.save
+        redirect_to "/genders", :notice => "Gender created successfully."
+      else
+        render 'new'
+      end
+
     else
-      render 'new'
+      render 'not_admin'
     end
+
   end
 
   def edit
@@ -27,22 +34,30 @@ class GendersController < ApplicationController
   end
 
   def update
-    @gender = Gender.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @gender = Gender.find(params[:id])
 
-    @gender.gender = params[:gender]
+      @gender.gender = params[:gender]
 
-    if @gender.save
-      redirect_to "/genders", :notice => "Gender updated successfully."
+      if @gender.save
+        redirect_to "/genders", :notice => "Gender updated successfully."
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      render 'not_admin'
     end
   end
 
   def destroy
-    @gender = Gender.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @gender = Gender.find(params[:id])
 
-    @gender.destroy
+      @gender.destroy
 
-    redirect_to "/genders", :notice => "Gender deleted."
+      redirect_to "/genders", :notice => "Gender deleted."
+    else
+      render 'not_admin'
+    end
   end
 end

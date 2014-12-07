@@ -1,45 +1,53 @@
-<!-- Validation failure messages -->
+<% if current_photographer.try(:admin_status?) %>
 
-<% if @event_title.errors.any? %>
-  <% @event_title.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
+  <!-- Validation failure messages -->
 
-<!-- Responsive panel example -->
-
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Add Event Title</h3>
+  <% if @event_title.errors.any? %>
+    <% @event_title.errors.full_messages.each do |message| %>
+      <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= message %>
       </div>
-      <div class="panel-body">
-        <form action="/create_event_title" class="form-horizontal">
-          <!-- Label and input for title -->
-          <div class="form-group">
-            <label for="title" class="col-sm-2 control-label">
-              Title
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @event_title.title %>">
-            </div>
-          </div>
+    <% end %>
+  <% end %>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="submit" value="Create Event Title" class="btn btn-success">
-              or
-              <a href="/event_titles">Cancel</a>
+  <!-- Responsive panel example -->
+
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Event Title</h3>
+        </div>
+        <div class="panel-body">
+          <form action="/create_event_title" class="form-horizontal">
+            <!-- Label and input for title -->
+            <div class="form-group">
+              <label for="title" class="col-sm-2 control-label">
+                Title
+              </label>
+              <div class="col-sm-10">
+                <input type="text" id="title" name="title" placeholder="Title" class="form-control" value="<%= @event_title.title %>">
+              </div>
             </div>
-          </div>
-        </form>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Create Event Title" class="btn btn-success">
+                or
+                <a href="/event_titles">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- End responsive panel example -->
+  <!-- End responsive panel example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

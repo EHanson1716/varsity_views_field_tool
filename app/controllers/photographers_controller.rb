@@ -4,7 +4,7 @@ class PhotographersController < ApplicationController
   end
 
   def show
-    @photographer = Photographer.find(params[:id])
+    @photographer = Photographer.find(current_photographer.id)
   end
 
   def new
@@ -12,19 +12,27 @@ class PhotographersController < ApplicationController
   end
 
   def create
-    @photographer = Photographer.new
-    @photographer.first_name = params[:first_name]
-    @photographer.last_name = params[:last_name]
-    @photographer.phone = params[:phone]
-    @photographer.email = params[:email]
-    @photographer.paypal = params[:paypal]
-    @photographer.string = params[:string]
 
-    if @photographer.save
-      redirect_to "/photographers", :notice => "Photographer created successfully."
-    else
-      render 'new'
-    end
+      if current_photographer.try(:admin_status?)
+
+        @photographer = Photographer.new
+        @photographer.first_name = params[:first_name]
+        @photographer.last_name = params[:last_name]
+        @photographer.phone = params[:phone]
+        @photographer.email = params[:email]
+        @photographer.paypal = params[:paypal]
+        @photographer.password = params[:password]
+
+        if @photographer.save
+          redirect_to "/photographers", :notice => "Photographer created successfully."
+        else
+          render 'new'
+        end
+
+      else
+        render 'not_admin'
+      end
+
   end
 
   def edit
@@ -32,27 +40,41 @@ class PhotographersController < ApplicationController
   end
 
   def update
-    @photographer = Photographer.find(params[:id])
+   if current_photographer.try(:admin_status?)
 
-    @photographer.first_name = params[:first_name]
-    @photographer.last_name = params[:last_name]
-    @photographer.phone = params[:phone]
-    @photographer.email = params[:email]
-    @photographer.paypal = params[:paypal]
-    @photographer.admin_status = params[:admin_status]
+      @photographer = Photographer.find(params[:id])
 
-    if @photographer.save
-      redirect_to "/photographers", :notice => "Photographer updated successfully."
+      @photographer.first_name = params[:first_name]
+      @photographer.last_name = params[:last_name]
+      @photographer.phone = params[:phone]
+      @photographer.email = params[:email]
+      @photographer.paypal = params[:paypal]
+      @photographer.admin_status = params[:admin_status]
+
+      if @photographer.save
+        redirect_to "/photographers", :notice => "Photographer updated successfully."
+      else
+        render 'edit'
+      end
+
     else
-      render 'edit'
+      render 'not_admin'
     end
+
   end
 
   def destroy
-    @photographer = Photographer.find(params[:id])
+   if current_photographer.try(:admin_status?)
 
-    @photographer.destroy
+      @photographer = Photographer.find(params[:id])
 
-    redirect_to "/photographers", :notice => "Photographer deleted."
+      @photographer.destroy
+
+      redirect_to "/photographers", :notice => "Photographer deleted."
+
+    else
+      render 'not_admin'
+    end
+
   end
 end

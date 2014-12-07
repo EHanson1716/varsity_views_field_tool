@@ -12,14 +12,21 @@ class SportsController < ApplicationController
   end
 
   def create
-    @sport = Sport.new
-    @sport.sport = params[:sport]
+   if current_photographer.try(:admin_status?)
 
-    if @sport.save
-      redirect_to "/sports", :notice => "Sport created successfully."
+      @sport = Sport.new
+      @sport.sport = params[:sport]
+
+      if @sport.save
+        redirect_to "/sports", :notice => "Sport created successfully."
+      else
+        render 'new'
+      end
+
     else
-      render 'new'
+      render 'not_admin'
     end
+
   end
 
   def edit
@@ -27,22 +34,31 @@ class SportsController < ApplicationController
   end
 
   def update
-    @sport = Sport.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @sport = Sport.find(params[:id])
 
-    @sport.sport = params[:sport]
+      @sport.sport = params[:sport]
 
-    if @sport.save
-      redirect_to "/sports", :notice => "Sport updated successfully."
+      if @sport.save
+        redirect_to "/sports", :notice => "Sport updated successfully."
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      render 'not_admin'
     end
   end
 
   def destroy
-    @sport = Sport.find(params[:id])
+   if current_photographer.try(:admin_status?)
 
-    @sport.destroy
+      @sport = Sport.find(params[:id])
 
-    redirect_to "/sports", :notice => "Sport deleted."
+      @sport.destroy
+
+      redirect_to "/sports", :notice => "Sport deleted."
+    else
+      render 'not_admin'
+    end
   end
 end

@@ -1,3 +1,6 @@
+<!-- Admin access only -->
+<% if current_photographer.try(:admin_status?) %>
+
 <!-- Validation failure messages -->
 
 <% if @photographer.errors.any? %>
@@ -70,6 +73,15 @@
           </div>
 
           <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">
+              Placeholder password
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="password" name="password" placeholder="password" class="form-control" value="<%= @photographer.password %>">
+            </div>
+          </div>
+
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <input type="submit" value="Create Photographer" class="btn btn-success">
               or
@@ -83,3 +95,9 @@
 </div>
 
 <!-- End responsive panel example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

@@ -1,47 +1,56 @@
-<!-- Validation failure messages -->
+<!-- Admin access only -->
+<% if current_photographer.try(:admin_status?) %>
 
-<% if @gender.errors.any? %>
-  <% @gender.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
+  <!-- Validation failure messages -->
 
-
-<!-- Responsive panel example -->
-
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit Gender #<%= @gender.id %></h3>
+  <% if @gender.errors.any? %>
+    <% @gender.errors.full_messages.each do |message| %>
+      <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= message %>
       </div>
-      <div class="panel-body">
-        <form action="/update_gender/<%= @gender.id %>" class="form-horizontal">
-          <!-- Label and input for gender -->
-          <div class="form-group">
-            <label for="gender" class="col-sm-2 control-label">
-              Gender
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="gender" name="gender" placeholder="Gender" class="form-control" value="<%= @gender.gender %>">
-            </div>
-          </div>
+    <% end %>
+  <% end %>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="submit" value="Update Gender" class="btn btn-warning">
-              or
-              <a href="/genders/<%= @gender.id %>">Cancel</a>
+
+  <!-- Responsive panel example -->
+
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Edit Gender #<%= @gender.id %></h3>
+        </div>
+        <div class="panel-body">
+          <form action="/update_gender/<%= @gender.id %>" class="form-horizontal">
+            <!-- Label and input for gender -->
+            <div class="form-group">
+              <label for="gender" class="col-sm-2 control-label">
+                Gender
+              </label>
+              <div class="col-sm-10">
+                <input type="text" id="gender" name="gender" placeholder="Gender" class="form-control" value="<%= @gender.gender %>">
+              </div>
             </div>
-          </div>
-        </form>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Update Gender" class="btn btn-warning">
+                or
+                <a href="/genders/<%= @gender.id %>">Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 <!-- End responsive panel example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

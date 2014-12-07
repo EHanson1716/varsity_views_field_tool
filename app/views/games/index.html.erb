@@ -1,142 +1,151 @@
-<div class="page-header">
-  <h1>
-    Games
-    <a href="/games/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
-  </h1>
-</div>
+<!-- Admin access only -->
+<% if current_photographer.try(:admin_status?) %>
 
-<!-- Responsive, Isotope-based layout example -->
-
-<div class="row">
-  <div class="col-xs-12">
-    <input type="text" id="quicksearch" placeholder="Search Games (start typing)" class="form-control">
+  <div class="page-header">
+    <h1>
+      Games
+      <a href="/games/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i></a>
+    </h1>
   </div>
-</div>
 
-<hr>
+  <!-- Responsive, Isotope-based layout example -->
 
-<div class="row isotope-container">
-<% ordered_games = @games.order(:date) %>
-<% ordered_games.each do |game| %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Game #<%= game.id %></h3>
-      </div>
-      <div class="panel-body">
-        <dl>
-          <dt>Photographer</dt>
-          <dd><%= game.photographer.first_name %> <%= game.photographer.last_name %></dd>
+  <div class="row">
+    <div class="col-xs-12">
+      <input type="text" id="quicksearch" placeholder="Search Games (start typing)" class="form-control">
+    </div>
+  </div>
 
-          <dt>Date</dt>
-          <dd><%= game.date %></dd>
+  <hr>
 
-          <dt>Time</dt>
-          <dd><%= game.time %></dd>
+  <div class="row isotope-container">
+  <% ordered_games = @games.order(:date) %>
+  <% ordered_games.each do |game| %>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Game #<%= game.id %></h3>
+        </div>
+        <div class="panel-body">
+          <dl>
+            <dt>Photographer</dt>
+            <dd><%= game.photographer.first_name %> <%= game.photographer.last_name %></dd>
 
-          <dt>Location</dt>
-          <dd><%= game.location.short_name %></dd>
+            <dt>Date</dt>
+            <dd><%= game.date %></dd>
 
-          <dt>Sport</dt>
-          <dd><%= game.sport.sport %></dd>
+            <dt>Time</dt>
+            <dd><%= game.time %></dd>
 
-          <dt>Level</dt>
-          <dd><%= game.level.level %></dd>
+            <dt>Location</dt>
+            <dd><%= game.location.short_name %></dd>
 
-          <dt>Gender</dt>
-          <dd><%= game.gender.gender %></dd>
+            <dt>Sport</dt>
+            <dd><%= game.sport.sport %></dd>
 
-          <dt>Home</dt>
-          <dd><%= School.find_by({ :id => game.home_id }).short_name %></dd>
+            <dt>Level</dt>
+            <dd><%= game.level.level %></dd>
 
-          <dt>Away</dt>
-          <dd><%= School.find_by({ :id => game.away_id }).short_name %></dd>
+            <dt>Gender</dt>
+            <dd><%= game.gender.gender %></dd>
 
-          <dt>Event title</dt>
-          <dd><%= game.event_title.title %></dd>
+            <dt>Home</dt>
+            <dd><%= School.find_by({ :id => game.home_id }).short_name %></dd>
 
-          <dt>Check in time</dt>
-          <dd><%= game.check_in_time %></dd>
+            <dt>Away</dt>
+            <dd><%= School.find_by({ :id => game.away_id }).short_name %></dd>
 
-          <dt>Check out time</dt>
-          <dd><%= game.check_out_time %></dd>
+            <dt>Event title</dt>
+            <dd><%= game.event_title.title %></dd>
 
-          <dt>Comments</dt>
-          <dd><%= game.comments %></dd>
+            <dt>Check in time</dt>
+            <dd><%= game.check_in_time %></dd>
 
-          <dt>Photos submitted</dt>
-          <dd><%= game.photos_submitted %></dd>
+            <dt>Check out time</dt>
+            <dd><%= game.check_out_time %></dd>
 
-          <dt>Game paid</dt>
-          <dd><%= game.game_paid %></dd>
+            <dt>Comments</dt>
+            <dd><%= game.comments %></dd>
 
-          <dt>Rainout</dt>
-          <dd><%= game.rainout %></dd>
+            <dt>Photos submitted</dt>
+            <dd><%= game.photos_submitted %></dd>
 
-          <dt>Denied entry</dt>
-          <dd><%= game.denied_entry %></dd>
+            <dt>Game paid</dt>
+            <dd><%= game.game_paid %></dd>
 
-          <dt>Equipment failure</dt>
-          <dd><%= game.equipment_failure %></dd>
+            <dt>Rainout</dt>
+            <dd><%= game.rainout %></dd>
 
-        </dl>
-        <div class="btn-group btn-group-justified">
-          <a href="/games/<%= game.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
-          </a>
+            <dt>Denied entry</dt>
+            <dd><%= game.denied_entry %></dd>
 
-          <a href="/games/<%= game.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
-          </a>
+            <dt>Equipment failure</dt>
+            <dd><%= game.equipment_failure %></dd>
 
-          <a href="/delete_game/<%= game.id %>" class="btn btn-danger">
-            <i class="fa fa-trash-o"></i>
-          </a>
+          </dl>
+          <div class="btn-group btn-group-justified">
+            <a href="/games/<%= game.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+
+            <a href="/games/<%= game.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+
+            <a href="/delete_game/<%= game.id %>" class="btn btn-danger">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
+  <% end %>
   </div>
-<% end %>
-</div>
 
-<!-- JavaScript for Isotope layout and quicksearch -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
-<script>
-  $(function() {
-    // quick search regex
-    var qsRegex;
+  <!-- JavaScript for Isotope layout and quicksearch -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
+  <script>
+    $(function() {
+      // quick search regex
+      var qsRegex;
 
-    // init Isotope
-    var $container = $('.isotope-container').isotope({
-      itemSelector: '.isotope-item',
-      layoutMode: 'masonry',
-      filter: function() {
-        return qsRegex ? $(this).text().match( qsRegex ) : true;
-      }
+      // init Isotope
+      var $container = $('.isotope-container').isotope({
+        itemSelector: '.isotope-item',
+        layoutMode: 'masonry',
+        filter: function() {
+          return qsRegex ? $(this).text().match( qsRegex ) : true;
+        }
+      });
+
+      // use value of search field to filter
+      var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+        qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+        $container.isotope();
+      }, 200 ) );
+
     });
 
-    // use value of search field to filter
-    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
-      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-      $container.isotope();
-    }, 200 ) );
-
-  });
-
-  // debounce so filtering doesn't happen every millisecond
-  function debounce( fn, threshold ) {
-    var timeout;
-    return function debounced() {
-      if ( timeout ) {
-        clearTimeout( timeout );
+    // debounce so filtering doesn't happen every millisecond
+    function debounce( fn, threshold ) {
+      var timeout;
+      return function debounced() {
+        if ( timeout ) {
+          clearTimeout( timeout );
+        }
+        function delayed() {
+          fn();
+          timeout = null;
+        }
+        timeout = setTimeout( delayed, threshold || 100 );
       }
-      function delayed() {
-        fn();
-        timeout = null;
-      }
-      timeout = setTimeout( delayed, threshold || 100 );
     }
-  }
-</script>
+  </script>
 
-<!-- End responsive, Isotope-based layout example -->
+  <!-- End responsive, Isotope-based layout example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

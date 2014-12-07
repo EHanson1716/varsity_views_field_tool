@@ -4,7 +4,8 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Photographer Record: <%= @photographer.first_name %> <%= @photographer.last_name %></h3>
+        <h3 class="panel-title">Here are your games, <%= @photographer.first_name %> <%= @photographer.last_name %>!</h3>
+        <h4 class="panel-title">Click on a game to get more details.</h4>
       </div>
       <div class="panel-body">
         <div class="row">
@@ -71,10 +72,11 @@
               <a href="/photographers/<%= @photographer.id %>/edit" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
-
-              <a href="/delete_photographer/<%= @photographer.id %>" class="btn btn-danger">
-                <i class="fa fa-trash-o"></i>
-              </a>
+              <% if current_photographer.try(:admin_status?) %>
+                <a href="/delete_photographer/<%= @photographer.id %>" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </a>
+              <% end %>
             </div>
           </div>
         </div>

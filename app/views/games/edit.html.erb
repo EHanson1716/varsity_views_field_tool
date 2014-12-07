@@ -1,274 +1,284 @@
-<!-- Validation failure messages -->
-
-<% if @game.errors.any? %>
-  <% @game.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
-<% end %>
+<!-- Admin access only -->
+<% if current_photographer.try(:admin_status?) %>
 
 
-<!-- Responsive panel example -->
+  <!-- Validation failure messages -->
 
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit Game #<%= @game.id %></h3>
+  <% if @game.errors.any? %>
+    <% @game.errors.full_messages.each do |message| %>
+      <div class="alert alert-dismissable alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= message %>
       </div>
-      <div class="panel-body">
-        <form action="/update_game/<%= @game.id %>" class="form-horizontal">
-          <!-- Label and input for photographer_id -->
-          <div class="form-group">
-            <label for="photographer_id" class="col-sm-2 control-label">
-              Photographer
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:photographer_id, options_from_collection_for_select(Photographer.all, :id, :last_name, @game.photographer_id), :class => "form-control") %>
-            </div>
-          </div>
+    <% end %>
+  <% end %>
 
-          <!-- Label and input for date -->
-          <div class="form-group">
-            <label for="date" class="col-sm-2 control-label">
-              Date
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @game.date %>">
-            </div>
-          </div>
 
-          <!-- Label and input for time -->
-          <div class="form-group">
-            <label for="time" class="col-sm-2 control-label">
-              Time
-            </label>
-            <div class="col-sm-10">
-              <input type="time" id="time" name="time" placeholder="Time" class="form-control" value="<%= @game.time %>">
-            </div>
-          </div>
+  <!-- Responsive panel example -->
 
-          <!-- Label and input for location_id -->
-          <div class="form-group">
-            <label for="location_id" class="col-sm-2 control-label">
-              Location
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:location_id, options_from_collection_for_select(Location.all, :id, :short_name, @game.location_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for sport_id -->
-          <div class="form-group">
-            <label for="sport_id" class="col-sm-2 control-label">
-              Sport
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :sport, @game.sport_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for level_id -->
-          <div class="form-group">
-            <label for="level_id" class="col-sm-2 control-label">
-              Level
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:level_id, options_from_collection_for_select(Level.all, :id, :level, @game.level_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for gender_id -->
-          <div class="form-group">
-            <label for="gender_id" class="col-sm-2 control-label">
-              Gender
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:gender_id, options_from_collection_for_select(Gender.all, :id, :gender, @game.gender_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for home_id -->
-          <div class="form-group">
-            <label for="home_id" class="col-sm-2 control-label">
-              Home
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:home_id, options_from_collection_for_select(School.all, :id, :short_name, @game.home_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for away_id -->
-          <div class="form-group">
-            <label for="away_id" class="col-sm-2 control-label">
-              Away
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:away_id, options_from_collection_for_select(School.all, :id, :short_name, @game.away_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for event_title_id -->
-          <div class="form-group">
-            <label for="event_title_id" class="col-sm-2 control-label">
-              Event title
-            </label>
-            <div class="col-sm-10">
-              <%= select_tag(:event_title_id, options_from_collection_for_select(EventTitle.all, :id, :title, @game.event_title_id), :class => "form-control") %>
-            </div>
-          </div>
-
-          <!-- Label and input for check_in_time -->
-          <div class="form-group">
-            <label for="check_in_time" class="col-sm-2 control-label">
-              Check in time
-            </label>
-            <div class="col-sm-10">
-              <input type="time" id="check_in_time" name="check_in_time" placeholder="Check in time" class="form-control" value="<%= @game.check_in_time %>">
-            </div>
-          </div>
-
-          <!-- Label and input for check_out_time -->
-          <div class="form-group">
-            <label for="check_out_time" class="col-sm-2 control-label">
-              Check out time
-            </label>
-            <div class="col-sm-10">
-              <input type="time" id="check_out_time" name="check_out_time" placeholder="Check out time" class="form-control" value="<%= @game.check_out_time %>">
-            </div>
-          </div>
-
-          <!-- Label and input for comments -->
-          <div class="form-group">
-            <label for="comments" class="col-sm-2 control-label">
-              Comments
-            </label>
-            <div class="col-sm-10">
-              <textarea id="comments" name="comments" placeholder="Comments" class="form-control" rows="3"><%= @game.comments %></textarea>
-            </div>
-          </div>
-
-          <!-- Label and input for photos_submitted -->
-           <% if @game.photos_submitted == 'true' %>
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Edit Game #<%= @game.id %></h3>
+        </div>
+        <div class="panel-body">
+          <form action="/update_game/<%= @game.id %>" class="form-horizontal">
+            <!-- Label and input for photographer_id -->
             <div class="form-group">
-              <label for="photos_submitted" class="col-sm-2 control-label">
-                Photos Submitted
+              <label for="photographer_id" class="col-sm-2 control-label">
+                Photographer
               </label>
               <div class="col-sm-10">
-                <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>" checked>
+                <%= select_tag(:photographer_id, options_from_collection_for_select(Photographer.all, :id, :last_name, @game.photographer_id), :class => "form-control") %>
               </div>
             </div>
-          <% else %>
+
+            <!-- Label and input for date -->
             <div class="form-group">
-              <label for="photos_submitted" class="col-sm-2 control-label">
-                Photos Submitted
+              <label for="date" class="col-sm-2 control-label">
+                Date
               </label>
               <div class="col-sm-10">
-                <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>">
+                <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @game.date %>">
               </div>
             </div>
-          <% end %>
+
+            <!-- Label and input for time -->
+            <div class="form-group">
+              <label for="time" class="col-sm-2 control-label">
+                Time
+              </label>
+              <div class="col-sm-10">
+                <input type="time" id="time" name="time" placeholder="Time" class="form-control" value="<%= @game.time %>">
+              </div>
+            </div>
+
+            <!-- Label and input for location_id -->
+            <div class="form-group">
+              <label for="location_id" class="col-sm-2 control-label">
+                Location
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:location_id, options_from_collection_for_select(Location.all, :id, :short_name, @game.location_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for sport_id -->
+            <div class="form-group">
+              <label for="sport_id" class="col-sm-2 control-label">
+                Sport
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:sport_id, options_from_collection_for_select(Sport.all, :id, :sport, @game.sport_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for level_id -->
+            <div class="form-group">
+              <label for="level_id" class="col-sm-2 control-label">
+                Level
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:level_id, options_from_collection_for_select(Level.all, :id, :level, @game.level_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for gender_id -->
+            <div class="form-group">
+              <label for="gender_id" class="col-sm-2 control-label">
+                Gender
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:gender_id, options_from_collection_for_select(Gender.all, :id, :gender, @game.gender_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for home_id -->
+            <div class="form-group">
+              <label for="home_id" class="col-sm-2 control-label">
+                Home
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:home_id, options_from_collection_for_select(School.all, :id, :short_name, @game.home_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for away_id -->
+            <div class="form-group">
+              <label for="away_id" class="col-sm-2 control-label">
+                Away
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:away_id, options_from_collection_for_select(School.all, :id, :short_name, @game.away_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for event_title_id -->
+            <div class="form-group">
+              <label for="event_title_id" class="col-sm-2 control-label">
+                Event title
+              </label>
+              <div class="col-sm-10">
+                <%= select_tag(:event_title_id, options_from_collection_for_select(EventTitle.all, :id, :title, @game.event_title_id), :class => "form-control") %>
+              </div>
+            </div>
+
+            <!-- Label and input for check_in_time -->
+            <div class="form-group">
+              <label for="check_in_time" class="col-sm-2 control-label">
+                Check in time
+              </label>
+              <div class="col-sm-10">
+                <input type="time" id="check_in_time" name="check_in_time" placeholder="Check in time" class="form-control" value="<%= @game.check_in_time %>">
+              </div>
+            </div>
+
+            <!-- Label and input for check_out_time -->
+            <div class="form-group">
+              <label for="check_out_time" class="col-sm-2 control-label">
+                Check out time
+              </label>
+              <div class="col-sm-10">
+                <input type="time" id="check_out_time" name="check_out_time" placeholder="Check out time" class="form-control" value="<%= @game.check_out_time %>">
+              </div>
+            </div>
+
+            <!-- Label and input for comments -->
+            <div class="form-group">
+              <label for="comments" class="col-sm-2 control-label">
+                Comments
+              </label>
+              <div class="col-sm-10">
+                <textarea id="comments" name="comments" placeholder="Comments" class="form-control" rows="3"><%= @game.comments %></textarea>
+              </div>
+            </div>
+
+            <!-- Label and input for photos_submitted -->
+             <% if @game.photos_submitted == 'true' %>
+              <div class="form-group">
+                <label for="photos_submitted" class="col-sm-2 control-label">
+                  Photos Submitted
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>" checked>
+                </div>
+              </div>
+            <% else %>
+              <div class="form-group">
+                <label for="photos_submitted" class="col-sm-2 control-label">
+                  Photos Submitted
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="photos_submitted" name="photos_submitted" value="<%= TRUE %>">
+                </div>
+              </div>
+            <% end %>
 
 
-          <!-- Label and input for game_paid -->
-          <% if @game.game_paid == 'true' %>
-            <div class="form-group">
-              <label for="game_paid" class="col-sm-2 control-label">
-                Game paid
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>" checked>
+            <!-- Label and input for game_paid -->
+            <% if @game.game_paid == 'true' %>
+              <div class="form-group">
+                <label for="game_paid" class="col-sm-2 control-label">
+                  Game paid
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>" checked>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="form-group">
-              <label for="game_paid" class="col-sm-2 control-label">
-                Game Paid
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>">
+            <% else %>
+              <div class="form-group">
+                <label for="game_paid" class="col-sm-2 control-label">
+                  Game Paid
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="game_paid" name="game_paid" value="<%= TRUE %>">
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
 
 
-          <!-- Label and input for rainout -->
-          <% if @game.rainout == 'true' %>
-            <div class="form-group">
-              <label for="rainout" class="col-sm-2 control-label">
-                Rainout
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>" checked>
+            <!-- Label and input for rainout -->
+            <% if @game.rainout == 'true' %>
+              <div class="form-group">
+                <label for="rainout" class="col-sm-2 control-label">
+                  Rainout
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>" checked>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="form-group">
-              <label for="rainout" class="col-sm-2 control-label">
-                Rainout
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>">
+            <% else %>
+              <div class="form-group">
+                <label for="rainout" class="col-sm-2 control-label">
+                  Rainout
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="rainout" name="rainout" value="<%= TRUE %>">
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
 
-          <!-- Label and input for denied_entry -->
-          <% if @game.denied_entry == 'true' %>
-            <div class="form-group">
-              <label for="denied_entry" class="col-sm-2 control-label">
-                Denied Entry
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>" checked>
+            <!-- Label and input for denied_entry -->
+            <% if @game.denied_entry == 'true' %>
+              <div class="form-group">
+                <label for="denied_entry" class="col-sm-2 control-label">
+                  Denied Entry
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>" checked>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="form-group">
-              <label for="denied_entry" class="col-sm-2 control-label">
-                Denied Entry
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>">
+            <% else %>
+              <div class="form-group">
+                <label for="denied_entry" class="col-sm-2 control-label">
+                  Denied Entry
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="denied_entry" name="denied_entry" value="<%= TRUE %>">
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
 
-          <!-- Label and input for equipment_failure -->
-          <% if @game.equipment_failure == 'true' %>
-            <div class="form-group">
-              <label for="equipment_failure" class="col-sm-2 control-label">
-                Equipment Failure
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>" checked>
+            <!-- Label and input for equipment_failure -->
+            <% if @game.equipment_failure == 'true' %>
+              <div class="form-group">
+                <label for="equipment_failure" class="col-sm-2 control-label">
+                  Equipment Failure
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>" checked>
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="form-group">
-              <label for="equipment_failure" class="col-sm-2 control-label">
-                Equipment Failure
-              </label>
-              <div class="col-sm-10">
-                <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>">
+            <% else %>
+              <div class="form-group">
+                <label for="equipment_failure" class="col-sm-2 control-label">
+                  Equipment Failure
+                </label>
+                <div class="col-sm-10">
+                  <input type="checkbox" id="equipment_failure" name="equipment_failure" value="<%= TRUE %>">
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <input type="submit" value="Update Game" class="btn btn-warning">
-              or
-              <a href="/games/<%= @game.id %>">Cancel</a>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Update Game" class="btn btn-warning">
+                or
+                <a href="/games/<%= @game.id %>">Cancel</a>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<!-- End responsive panel example -->
+  <!-- End responsive panel example -->
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

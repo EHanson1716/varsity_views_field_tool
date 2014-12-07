@@ -1,4 +1,6 @@
 class EventTitlesController < ApplicationController
+
+
   def index
     @event_titles = EventTitle.all
   end
@@ -12,37 +14,53 @@ class EventTitlesController < ApplicationController
   end
 
   def create
-    @event_title = EventTitle.new
-    @event_title.title = params[:title]
+   if current_photographer.try(:admin_status?)
+      @event_title = EventTitle.new
+      @event_title.title = params[:title]
 
-    if @event_title.save
-      redirect_to "/event_titles", :notice => "Event title created successfully."
+      if @event_title.save
+        redirect_to "/event_titles", :notice => "Event title created successfully."
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      render 'not_admin'
     end
   end
 
   def edit
-    @event_title = EventTitle.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @event_title = EventTitle.find(params[:id])
+    else
+      render 'not_admin'
+    end
   end
 
   def update
-    @event_title = EventTitle.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @event_title = EventTitle.find(params[:id])
 
-    @event_title.title = params[:title]
+      @event_title.title = params[:title]
 
-    if @event_title.save
-      redirect_to "/event_titles", :notice => "Event title updated successfully."
+      if @event_title.save
+        redirect_to "/event_titles", :notice => "Event title updated successfully."
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      render 'not_admin'
     end
   end
 
   def destroy
-    @event_title = EventTitle.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @event_title = EventTitle.find(params[:id])
 
-    @event_title.destroy
+      @event_title.destroy
 
-    redirect_to "/event_titles", :notice => "Event title deleted."
+      redirect_to "/event_titles", :notice => "Event title deleted."
+    else
+      render 'not_admin'
+    end
   end
 end

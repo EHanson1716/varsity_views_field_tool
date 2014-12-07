@@ -1,3 +1,5 @@
+<% if current_photographer.try(:admin_status?) %>
+
           <li><a href="/event_titles">Manage Event Titles</a></li>
           <li><a href="/genders">Manage Genders</a></li>
           <li><a href="/levels">Manage Competition Levels</a></li>
@@ -5,3 +7,9 @@
           <li><a href="/photographers">Manage Photographers</a></li>
           <li><a href="/schools">Manage Schools</a></li>
           <li><a href="/sports">Manage Sports</a></li>
+
+<% else %>
+
+Sorry, that page is only for Varsity Views administrators.
+
+<% end %>

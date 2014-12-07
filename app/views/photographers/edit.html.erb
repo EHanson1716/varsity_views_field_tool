@@ -1,3 +1,4 @@
+
 <!-- Validation failure messages -->
 
 <% if @photographer.errors.any? %>
@@ -16,7 +17,7 @@
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Edit Photographer #<%= @photographer.id %></h3>
+        <h3 class="panel-title">Edit Details for <%= @photographer.first_name %> <%= @photographer.last_name %></h3>
       </div>
       <div class="panel-body">
         <form action="/update_photographer/<%= @photographer.id %>" class="form-horizontal">

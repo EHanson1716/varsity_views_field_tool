@@ -12,20 +12,24 @@ class LocationsController < ApplicationController
   end
 
   def create
-    @location = Location.new
-    @location.short_name = params[:short_name]
-    @location.long_name = params[:long_name]
-    @location.address = params[:address]
-    @location.city = params[:city]
-    @location.state = params[:state]
-    @location.main_phone = params[:main_phone]
-    @location.rainout_phone = params[:rainout_phone]
-    @location.website = params[:website]
+   if current_photographer.try(:admin_status?)
+      @location = Location.new
+      @location.short_name = params[:short_name]
+      @location.long_name = params[:long_name]
+      @location.address = params[:address]
+      @location.city = params[:city]
+      @location.state = params[:state]
+      @location.main_phone = params[:main_phone]
+      @location.rainout_phone = params[:rainout_phone]
+      @location.website = params[:website]
 
-    if @location.save
-      redirect_to "/locations", :notice => "Location created successfully."
+      if @location.save
+        redirect_to "/locations", :notice => "Location created successfully."
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      render 'not_admin'
     end
   end
 
@@ -34,29 +38,37 @@ class LocationsController < ApplicationController
   end
 
   def update
-    @location = Location.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @location = Location.find(params[:id])
 
-    @location.short_name = params[:short_name]
-    @location.long_name = params[:long_name]
-    @location.address = params[:address]
-    @location.city = params[:city]
-    @location.state = params[:state]
-    @location.main_phone = params[:main_phone]
-    @location.rainout_phone = params[:rainout_phone]
-    @location.website = params[:website]
+      @location.short_name = params[:short_name]
+      @location.long_name = params[:long_name]
+      @location.address = params[:address]
+      @location.city = params[:city]
+      @location.state = params[:state]
+      @location.main_phone = params[:main_phone]
+      @location.rainout_phone = params[:rainout_phone]
+      @location.website = params[:website]
 
-    if @location.save
-      redirect_to "/locations", :notice => "Location updated successfully."
+      if @location.save
+        redirect_to "/locations", :notice => "Location updated successfully."
+      else
+        render 'edit'
+      end
     else
-      render 'edit'
+      render 'not_admin'
     end
   end
 
   def destroy
-    @location = Location.find(params[:id])
+   if current_photographer.try(:admin_status?)
+      @location = Location.find(params[:id])
 
-    @location.destroy
+      @location.destroy
 
-    redirect_to "/locations", :notice => "Location deleted."
+      redirect_to "/locations", :notice => "Location deleted."
+    else
+      render 'not_admin'
+    end
   end
 end
