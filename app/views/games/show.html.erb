@@ -86,14 +86,14 @@
             <dl class="dl-horizontal">
               <dt><h6><strong>Check in time</strong></h6></dt>
               <% if @game.check_in_time.present? == true %>
-                <dd><h6><%= @game.check_in_time.strftime("%D %r") %></h6></dd>
+                <dd><h6><%= @game.check_in_time.in_time_zone('Eastern Time (US & Canada)').strftime("%D %r") %></h6></dd>
               <% else %>
                 <dd><h6><%= @game.check_in_time %></h6></dd>
               <% end %>
 
               <dt><h6><strong>Check out time</strong></h6></dt>
               <% if @game.check_out_time.present? == true %>
-                <dd><h6><%= @game.check_out_time.strftime("%D %r") %></h6></dd>
+                <dd><h6><%= @game.check_out_time.in_time_zone('Eastern Time (US & Canada)').strftime("%D %r") %></h6></dd>
               <% else %>
                 <dd><h6><%= @game.check_out_time %></h6></dd>
               <% end %>

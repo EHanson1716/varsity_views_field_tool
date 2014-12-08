@@ -61,25 +61,6 @@
            </tr>
            <% end %>
         </div>
-
-        <div class="row">
-          <div class="col-md-12">
-            <div class="btn-group btn-group-justified">
-              <a href="/photographers" class="btn btn-primary">
-                <i class="fa fa-chevron-left"></i>
-              </a>
-
-              <a href="/photographers/<%= @photographer.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-              <% if current_photographer.try(:admin_status?) %>
-                <a href="/delete_photographer/<%= @photographer.id %>" class="btn btn-danger">
-                  <i class="fa fa-trash-o"></i>
-                </a>
-              <% end %>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

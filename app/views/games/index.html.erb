@@ -59,10 +59,18 @@
             <dd><%= game.event_title.title %></dd>
 
             <dt>Check in time</dt>
-            <dd><%= game.check_in_time %></dd>
+            <% if game.check_in_time != nil %>
+              <dd><%= game.check_in_time.in_time_zone('Eastern Time (US & Canada)').strftime("%D %r") %></dd>
+            <% else %>
+              <dd></dd>
+            <% end  %>
 
             <dt>Check out time</dt>
-            <dd><%= game.check_out_time %></dd>
+            <% if game.check_out_time != nil %>
+            <dd><%= game.check_out_time.in_time_zone('Eastern Time (US & Canada)').strftime("%D %r") %></dd>
+            <% else %>
+              <dd></dd>
+            <% end  %>
 
             <dt>Comments</dt>
             <dd><%= game.comments %></dd>
