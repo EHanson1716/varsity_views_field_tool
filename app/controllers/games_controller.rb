@@ -143,5 +143,14 @@ class GamesController < ApplicationController
     end
   end
 
+  def comment
+    @game = Game.find(params[:id])
+    @game.comments = params[:comments]
+    if @game.save
+        redirect_to "/games/#{params[:id]}", :notice => "Comments submitted successfully."
+    else
+      render 'show'
+    end
+  end
 
 end

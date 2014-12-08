@@ -147,11 +147,14 @@ Rails.application.routes.draw do
   # Rainout
   get('/game_rainout/:id', { :controller => 'games', :action => 'rainout' })
 
-  # Rainout
+  # Denied Entry
   get('/game_denied_entry/:id', { :controller => 'games', :action => 'denied_entry' })
 
-  # Rainout
+  # Equipment Failure
   get('/game_equipment_failure/:id', { :controller => 'games', :action => 'equipment_failure' })
+
+  # Equipment Failure
+  get('/game_comment/:id', { :controller => 'games', :action => 'comment' })
 
   #------------------------------
 
