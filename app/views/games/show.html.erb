@@ -160,9 +160,15 @@
       </div>
 
             <div class="btn-group btn-group-justified">
-              <a href="/" class="btn btn-primary">
-                <i class="fa fa-chevron-left"></i>
-              </a>
+            <% if current_photographer.try(:admin_status?) %>
+                <a href="/games" class="btn btn-primary">
+                  <i class="fa fa-chevron-left"></i>
+                </a>
+            <% else %>
+                 <a href="/games" class="btn btn-primary">
+                  <i class="fa fa-chevron-left"></i>
+                </a>
+            <% end %>
 
               </a>
             </div>
