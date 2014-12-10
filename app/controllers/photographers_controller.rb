@@ -4,7 +4,17 @@ class PhotographersController < ApplicationController
   end
 
   def show
-    @photographer = Photographer.find(current_photographer.id)
+
+    if current_photographer.try(:admin_status?)
+
+      @photographer = Photographer.find(params[:id])
+
+    else
+
+      @photographer = Photographer.find(current_photographer.id)
+
+    end
+
   end
 
   def new
