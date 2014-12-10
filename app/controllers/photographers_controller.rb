@@ -7,7 +7,12 @@ class PhotographersController < ApplicationController
 
     if current_photographer.try(:admin_status?)
 
-      @photographer = Photographer.find(params[:id])
+      if params[:id] == nil
+        @photographer = Photographer.find(current_photographer.id)
+      else
+
+        @photographer = Photographer.find(params[:id])
+      end
 
     else
 
