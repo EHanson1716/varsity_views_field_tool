@@ -71,36 +71,39 @@
             </div>
           </div>
 
-          <% if @photographer.admin_status == 'true' %>
+          <% if current_photographer.try(:admin_status?) %>
+
+            <% if @photographer.admin_status == 'true' %>
+              <div class="form-group">
+                <label for="admin_status" class="col-sm-2 control-label">
+                  Admin Status
+                </label>
+                <div class="col-sm-10">
+                  <input type="radio" name="admin_status" value="true" checked>True
+                  <br>
+                  <input type="radio" name="admin_status" value="false">False
+                </div>
+              </div>
+            <% else %>
             <div class="form-group">
-              <label for="admin_status" class="col-sm-2 control-label">
-                Admin Status
-              </label>
-              <div class="col-sm-10">
-                <input type="radio" name="admin_status" value="true" checked>True
-                <br>
-                <input type="radio" name="admin_status" value="false">False
+                <label for="admin_status" class="col-sm-2 control-label">
+                  Admin Status
+                </label>
+                <div class="col-sm-10">
+                  <input type="radio" name="admin_status" value="true">True
+                  <br>
+                  <input type="radio" name="admin_status" value="false" checked>False
+                </div>
               </div>
-            </div>
-          <% else %>
-<!--              <div class="form-group">
-              <label for="admin_status" class="col-sm-2 control-label">
-                Admin Status
-              </label>
-              <div class="col-sm-10">
-                <input type="radio" name="admin_status" value="true">True
-                <br>
-                <input type="radio" name="admin_status" value="false" checked>False
-              </div>
-            </div>
- -->       <% end %>
+            <% end %>
+          <% end %>
 
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <input type="submit" value="Update Photographer" class="btn btn-warning">
               or
-              <a href="/photographers/<%= @photographer.id %>">Cancel</a>
+              <a href="/photographers/">Cancel</a>
             </div>
           </div>
         </form>
