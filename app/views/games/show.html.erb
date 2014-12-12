@@ -35,10 +35,10 @@
               <dd><%= @game.gender.gender %></dd>
 
               <dt>Home</dt>
-              <dd><%= School.find_by({ :id => @game.home_id }).short_name %></dd>
+              <dd><%= @game.home.short_name %></dd>
 
               <dt>Away</dt>
-              <dd><%= School.find_by({ :id => @game.away_id }).short_name %></dd>
+              <dd><%= @game.away.short_name %></dd>
 
               <dt>Event title</dt>
               <dd><%= @game.event_title.title %></dd>

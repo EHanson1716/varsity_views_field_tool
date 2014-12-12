@@ -7,14 +7,16 @@ class Game < ActiveRecord::Base
   belongs_to :gender
   belongs_to :school
   belongs_to :event_title
+  belongs_to :home, :class_name => "School", :foreign_key => "home_id"
+  belongs_to :away, :class_name => "School", :foreign_key => "away_id"
 
 
 
   validates :date, :presence => true
-  validates :location_id, :presence => true
-  validates :sport_id, :presence => true
-  validates :level_id, :presence => true
-  validates :gender_id, :presence => true
-  validates :home_id, :presence => true
-  validates :away_id, :presence => true
+  validates :location, :presence => true
+  validates :sport, :presence => true
+  validates :level, :presence => true
+  validates :gender, :presence => true
+  validates :home, :presence => true
+  validates :away, :presence => true
 end

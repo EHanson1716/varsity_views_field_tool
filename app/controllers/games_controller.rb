@@ -1,4 +1,13 @@
 class GamesController < ApplicationController
+
+  before_action :ensure_admin, :only => [:edit]
+
+  def ensure_admin
+    if current_photographer.admin_status? != true
+      redirect_to root_url, :notice => "nice try"
+    end
+  end
+
   def index
     @games = Game.all
   end
